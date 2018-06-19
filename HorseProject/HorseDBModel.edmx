@@ -1,0 +1,866 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HorseDBModel.Store" Provider="Npgsql" ProviderManifestToken="10.4" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bein">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farbe" Type="text" />
+          <Property Name="abzeichen" Type="text" />
+          <Property Name="huf" Type="text" />
+        </EntityType>
+        <EntityType Name="Foto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pferd" Type="int4" />
+        </EntityType>
+        <EntityType Name="Grafik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pferd" Type="int4" />
+        </EntityType>
+        <EntityType Name="Koerper">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farbe" Type="text" />
+          <Property Name="abzeichen" Type="text" />
+          <Property Name="maehne" Type="text" />
+          <Property Name="wirbel" Type="text" />
+          <Property Name="dominanz" Type="text" />
+          <Property Name="weiteremerkmale" Type="text" />
+        </EntityType>
+        <EntityType Name="Kopf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="farbe" Type="text" />
+          <Property Name="abzeichen" Type="text" />
+          <Property Name="gebiss" Type="text" />
+          <Property Name="augen" Type="text" />
+          <Property Name="wirbelzahlstirn" Type="text" />
+          <Property Name="wirbelzahlzwischennuestern" Type="text" />
+          <Property Name="wirbelzahloberlippe" Type="text" />
+          <Property Name="wirbelzahlbacken" Type="text" />
+        </EntityType>
+        <EntityType Name="Merkmale">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kopf" Type="int4" />
+          <Property Name="vorderbeinlinks" Type="int4" />
+          <Property Name="vorderbeinrechts" Type="int4" />
+          <Property Name="hinterbeinlinks" Type="int4" />
+          <Property Name="hinterbeinrechts" Type="int4" />
+          <Property Name="koerper" Type="int4" />
+          <Property Name="besonderheiten" Type="text" />
+          <Property Name="beurteilung" Type="text" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nachname" Type="text" />
+          <Property Name="vorname" Type="text" />
+          <Property Name="titelpre" Type="text" />
+          <Property Name="titelpost" Type="text" />
+          <Property Name="geburtsdatum" Type="date" />
+          <Property Name="strasse" Type="text" />
+          <Property Name="hausnummer" Type="text" />
+          <Property Name="postleitzahl" Type="text" />
+          <Property Name="ort" Type="text" />
+          <Property Name="land" Type="text" />
+          <Property Name="hofname" Type="text" />
+          <Property Name="telefonnummer" Type="text" />
+          <Property Name="mobiltelefon" Type="text" />
+          <Property Name="email" Type="text" />
+          <Property Name="mitgliedsbeitragbezahlt" Type="bool" />
+          <Property Name="mitgliedseit" Type="date" />
+          <Property Name="mitgliedschaftsart" Type="text" />
+        </EntityType>
+        <EntityType Name="Pferd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="herkunft" Type="text" />
+          <Property Name="geschlecht" Type="text" Nullable="false" />
+          <Property Name="geburtsdatum" Type="date" Nullable="false" />
+          <Property Name="geburtsort" Type="text" />
+          <Property Name="farbeundabzeichen" Type="text" />
+          <Property Name="ueln" Type="text" />
+          <Property Name="mikrochipnummer" Type="text" />
+          <Property Name="brandnummer" Type="text" />
+          <Property Name="dna" Type="text" />
+          <Property Name="pferdepassnummer" Type="text" />
+          <Property Name="pferdepassausstellungsdatum" Type="date" />
+          <Property Name="registernummer" Type="text" />
+          <Property Name="idnummer" Type="text" />
+          <Property Name="zuchtbuchnummer" Type="text" />
+          <Property Name="schlachtpferd" Type="bool" />
+          <Property Name="abgangsstandort" Type="text" />
+          <Property Name="lebend" Type="bool" />
+          <Property Name="zuchtwert" Type="text" />
+          <Property Name="zuchtbuch" Type="text" />
+          <Property Name="fohlennummer" Type="text" />
+          <Property Name="zuechter" Type="int4" />
+          <Property Name="besitzer" Type="int4" />
+          <Property Name="merkmale" Type="int4" />
+          <Property Name="mutter" Type="int4" />
+          <Property Name="vater" Type="int4" />
+        </EntityType>
+        <Association Name="besitzer_fk">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd">
+              <PropertyRef Name="besitzer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="foto_fk">
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="0..1" />
+          <End Role="Foto" Type="Self.Foto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pferd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Foto">
+              <PropertyRef Name="pferd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="grafik_fk">
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="0..1" />
+          <End Role="Grafik" Type="Self.Grafik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pferd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Grafik">
+              <PropertyRef Name="pferd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_fk">
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="0..1" />
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merkmale">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd">
+              <PropertyRef Name="merkmale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_hbl">
+          <End Role="Bein" Type="Self.Bein" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bein">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="hinterbeinlinks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_hbr">
+          <End Role="Bein" Type="Self.Bein" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bein">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="hinterbeinrechts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_koerper">
+          <End Role="Koerper" Type="Self.Koerper" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Koerper">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="koerper" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_kopf_fk">
+          <End Role="Kopf" Type="Self.Kopf" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kopf">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="kopf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_vbl_fk">
+          <End Role="Bein" Type="Self.Bein" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bein">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="vorderbeinlinks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_vbr">
+          <End Role="Bein" Type="Self.Bein" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bein">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="vorderbeinrechts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mutter_fk">
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="1" />
+          <End Role="Pferd1" Type="Self.Pferd" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pferd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vater_fk">
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="1" />
+          <End Role="Pferd1" Type="Self.Pferd" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pferd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="zuechter_fk">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd">
+              <PropertyRef Name="zuechter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HorseDBModelStoreContainer">
+          <EntitySet Name="Bein" EntityType="Self.Bein" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Foto" EntityType="Self.Foto" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Grafik" EntityType="Self.Grafik" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Koerper" EntityType="Self.Koerper" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Kopf" EntityType="Self.Kopf" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Merkmale" EntityType="Self.Merkmale" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="public" store:Type="Tables" />
+          <EntitySet Name="Pferd" EntityType="Self.Pferd" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="besitzer_fk" Association="Self.besitzer_fk">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Pferd" EntitySet="Pferd" />
+          </AssociationSet>
+          <AssociationSet Name="foto_fk" Association="Self.foto_fk">
+            <End Role="Pferd" EntitySet="Pferd" />
+            <End Role="Foto" EntitySet="Foto" />
+          </AssociationSet>
+          <AssociationSet Name="grafik_fk" Association="Self.grafik_fk">
+            <End Role="Pferd" EntitySet="Pferd" />
+            <End Role="Grafik" EntitySet="Grafik" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_fk" Association="Self.merkmale_fk">
+            <End Role="Merkmale" EntitySet="Merkmale" />
+            <End Role="Pferd" EntitySet="Pferd" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_hbl" Association="Self.merkmale_hbl">
+            <End Role="Bein" EntitySet="Bein" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_hbr" Association="Self.merkmale_hbr">
+            <End Role="Bein" EntitySet="Bein" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_koerper" Association="Self.merkmale_koerper">
+            <End Role="Koerper" EntitySet="Koerper" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_kopf_fk" Association="Self.merkmale_kopf_fk">
+            <End Role="Kopf" EntitySet="Kopf" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_vbl_fk" Association="Self.merkmale_vbl_fk">
+            <End Role="Bein" EntitySet="Bein" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_vbr" Association="Self.merkmale_vbr">
+            <End Role="Bein" EntitySet="Bein" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="mutter_fk" Association="Self.mutter_fk">
+            <End Role="Pferd" EntitySet="Pferd" />
+            <End Role="Pferd1" EntitySet="Pferd" />
+          </AssociationSet>
+          <AssociationSet Name="vater_fk" Association="Self.vater_fk">
+            <End Role="Pferd" EntitySet="Pferd" />
+            <End Role="Pferd1" EntitySet="Pferd" />
+          </AssociationSet>
+          <AssociationSet Name="zuechter_fk" Association="Self.zuechter_fk">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Pferd" EntitySet="Pferd" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HorseDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bein">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farbe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="abzeichen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="huf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Merkmale" Relationship="Self.merkmale_hbl" FromRole="Bein" ToRole="Merkmale" />
+          <NavigationProperty Name="Merkmale1" Relationship="Self.merkmale_hbr" FromRole="Bein" ToRole="Merkmale" />
+          <NavigationProperty Name="Merkmale2" Relationship="Self.merkmale_vbl_fk" FromRole="Bein" ToRole="Merkmale" />
+          <NavigationProperty Name="Merkmale3" Relationship="Self.merkmale_vbr" FromRole="Bein" ToRole="Merkmale" />
+        </EntityType>
+        <EntityType Name="Foto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pferd" Type="Int32" />
+          <NavigationProperty Name="Pferd1" Relationship="Self.foto_fk" FromRole="Foto" ToRole="Pferd" />
+        </EntityType>
+        <EntityType Name="Grafik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pferd" Type="Int32" />
+          <NavigationProperty Name="Pferd1" Relationship="Self.grafik_fk" FromRole="Grafik" ToRole="Pferd" />
+        </EntityType>
+        <EntityType Name="Koerper">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farbe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="abzeichen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="maehne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="wirbel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dominanz" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="weiteremerkmale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Merkmale" Relationship="Self.merkmale_koerper" FromRole="Koerper" ToRole="Merkmale" />
+        </EntityType>
+        <EntityType Name="Kopf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="farbe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="abzeichen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gebiss" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="augen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="wirbelzahlstirn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="wirbelzahlzwischennuestern" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="wirbelzahloberlippe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="wirbelzahlbacken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Merkmale" Relationship="Self.merkmale_kopf_fk" FromRole="Kopf" ToRole="Merkmale" />
+        </EntityType>
+        <EntityType Name="Merkmale">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kopf" Type="Int32" />
+          <Property Name="vorderbeinlinks" Type="Int32" />
+          <Property Name="vorderbeinrechts" Type="Int32" />
+          <Property Name="hinterbeinlinks" Type="Int32" />
+          <Property Name="hinterbeinrechts" Type="Int32" />
+          <Property Name="koerper" Type="Int32" />
+          <Property Name="besonderheiten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="beurteilung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bein" Relationship="Self.merkmale_hbl" FromRole="Merkmale" ToRole="Bein" />
+          <NavigationProperty Name="Bein1" Relationship="Self.merkmale_hbr" FromRole="Merkmale" ToRole="Bein" />
+          <NavigationProperty Name="Bein2" Relationship="Self.merkmale_vbl_fk" FromRole="Merkmale" ToRole="Bein" />
+          <NavigationProperty Name="Bein3" Relationship="Self.merkmale_vbr" FromRole="Merkmale" ToRole="Bein" />
+          <NavigationProperty Name="Koerper1" Relationship="Self.merkmale_koerper" FromRole="Merkmale" ToRole="Koerper" />
+          <NavigationProperty Name="Kopf1" Relationship="Self.merkmale_kopf_fk" FromRole="Merkmale" ToRole="Kopf" />
+          <NavigationProperty Name="Pferd" Relationship="Self.merkmale_fk" FromRole="Merkmale" ToRole="Pferd" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nachname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vorname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="titelpre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="titelpost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="geburtsdatum" Type="DateTime" Precision="0" />
+          <Property Name="strasse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hausnummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="postleitzahl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ort" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="land" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hofname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="telefonnummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mobiltelefon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mitgliedsbeitragbezahlt" Type="Boolean" />
+          <Property Name="mitgliedseit" Type="DateTime" Precision="0" />
+          <Property Name="mitgliedschaftsart" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pferd" Relationship="Self.besitzer_fk" FromRole="Person" ToRole="Pferd" />
+          <NavigationProperty Name="Pferd1" Relationship="Self.zuechter_fk" FromRole="Person" ToRole="Pferd" />
+        </EntityType>
+        <EntityType Name="Pferd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="herkunft" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="geschlecht" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="geburtsdatum" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="geburtsort" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="farbeundabzeichen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ueln" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="mikrochipnummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="brandnummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dna" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pferdepassnummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="pferdepassausstellungsdatum" Type="DateTime" Precision="0" />
+          <Property Name="registernummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idnummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="zuchtbuchnummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="schlachtpferd" Type="Boolean" />
+          <Property Name="abgangsstandort" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="lebend" Type="Boolean" />
+          <Property Name="zuchtwert" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="zuchtbuch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fohlennummer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="zuechter" Type="Int32" />
+          <Property Name="besitzer" Type="Int32" />
+          <Property Name="merkmale" Type="Int32" />
+          <Property Name="mutter" Type="Int32" />
+          <Property Name="vater" Type="Int32" />
+          <NavigationProperty Name="Foto" Relationship="Self.foto_fk" FromRole="Pferd" ToRole="Foto" />
+          <NavigationProperty Name="Grafik" Relationship="Self.grafik_fk" FromRole="Pferd" ToRole="Grafik" />
+          <NavigationProperty Name="Merkmale1" Relationship="Self.merkmale_fk" FromRole="Pferd" ToRole="Merkmale" />
+          <NavigationProperty Name="Person" Relationship="Self.besitzer_fk" FromRole="Pferd" ToRole="Person" />
+          <NavigationProperty Name="Person1" Relationship="Self.zuechter_fk" FromRole="Pferd" ToRole="Person" />
+          <NavigationProperty Name="Pferd1" Relationship="Self.mutter_fk" FromRole="Pferd" ToRole="Pferd1" />
+          <NavigationProperty Name="Pferd2" Relationship="Self.mutter_fk" FromRole="Pferd1" ToRole="Pferd" />
+          <NavigationProperty Name="Pferd11" Relationship="Self.vater_fk" FromRole="Pferd" ToRole="Pferd1" />
+          <NavigationProperty Name="Pferd3" Relationship="Self.vater_fk" FromRole="Pferd1" ToRole="Pferd" />
+        </EntityType>
+        <Association Name="merkmale_hbl">
+          <End Role="Bein" Type="Self.Bein" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bein">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="hinterbeinlinks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_hbr">
+          <End Role="Bein" Type="Self.Bein" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bein">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="hinterbeinrechts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_vbl_fk">
+          <End Role="Bein" Type="Self.Bein" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bein">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="vorderbeinlinks" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_vbr">
+          <End Role="Bein" Type="Self.Bein" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bein">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="vorderbeinrechts" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="foto_fk">
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="0..1" />
+          <End Role="Foto" Type="Self.Foto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pferd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Foto">
+              <PropertyRef Name="pferd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="grafik_fk">
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="0..1" />
+          <End Role="Grafik" Type="Self.Grafik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pferd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Grafik">
+              <PropertyRef Name="pferd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_koerper">
+          <End Role="Koerper" Type="Self.Koerper" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Koerper">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="koerper" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_kopf_fk">
+          <End Role="Kopf" Type="Self.Kopf" Multiplicity="0..1" />
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kopf">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Merkmale">
+              <PropertyRef Name="kopf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="merkmale_fk">
+          <End Role="Merkmale" Type="Self.Merkmale" Multiplicity="0..1" />
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merkmale">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd">
+              <PropertyRef Name="merkmale" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="besitzer_fk">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd">
+              <PropertyRef Name="besitzer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="zuechter_fk">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd">
+              <PropertyRef Name="zuechter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mutter_fk">
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="1" />
+          <End Role="Pferd1" Type="Self.Pferd" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pferd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="vater_fk">
+          <End Role="Pferd" Type="Self.Pferd" Multiplicity="1" />
+          <End Role="Pferd1" Type="Self.Pferd" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pferd">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pferd1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HorseDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bein" EntityType="Self.Bein" />
+          <EntitySet Name="Foto" EntityType="Self.Foto" />
+          <EntitySet Name="Grafik" EntityType="Self.Grafik" />
+          <EntitySet Name="Koerper" EntityType="Self.Koerper" />
+          <EntitySet Name="Kopf" EntityType="Self.Kopf" />
+          <EntitySet Name="Merkmale" EntityType="Self.Merkmale" />
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="Pferd" EntityType="Self.Pferd" />
+          <AssociationSet Name="merkmale_hbl" Association="Self.merkmale_hbl">
+            <End Role="Bein" EntitySet="Bein" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_hbr" Association="Self.merkmale_hbr">
+            <End Role="Bein" EntitySet="Bein" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_vbl_fk" Association="Self.merkmale_vbl_fk">
+            <End Role="Bein" EntitySet="Bein" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_vbr" Association="Self.merkmale_vbr">
+            <End Role="Bein" EntitySet="Bein" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="foto_fk" Association="Self.foto_fk">
+            <End Role="Pferd" EntitySet="Pferd" />
+            <End Role="Foto" EntitySet="Foto" />
+          </AssociationSet>
+          <AssociationSet Name="grafik_fk" Association="Self.grafik_fk">
+            <End Role="Pferd" EntitySet="Pferd" />
+            <End Role="Grafik" EntitySet="Grafik" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_koerper" Association="Self.merkmale_koerper">
+            <End Role="Koerper" EntitySet="Koerper" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_kopf_fk" Association="Self.merkmale_kopf_fk">
+            <End Role="Kopf" EntitySet="Kopf" />
+            <End Role="Merkmale" EntitySet="Merkmale" />
+          </AssociationSet>
+          <AssociationSet Name="merkmale_fk" Association="Self.merkmale_fk">
+            <End Role="Merkmale" EntitySet="Merkmale" />
+            <End Role="Pferd" EntitySet="Pferd" />
+          </AssociationSet>
+          <AssociationSet Name="besitzer_fk" Association="Self.besitzer_fk">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Pferd" EntitySet="Pferd" />
+          </AssociationSet>
+          <AssociationSet Name="zuechter_fk" Association="Self.zuechter_fk">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Pferd" EntitySet="Pferd" />
+          </AssociationSet>
+          <AssociationSet Name="mutter_fk" Association="Self.mutter_fk">
+            <End Role="Pferd" EntitySet="Pferd" />
+            <End Role="Pferd1" EntitySet="Pferd" />
+          </AssociationSet>
+          <AssociationSet Name="vater_fk" Association="Self.vater_fk">
+            <End Role="Pferd" EntitySet="Pferd" />
+            <End Role="Pferd1" EntitySet="Pferd" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HorseDBModelStoreContainer" CdmEntityContainer="HorseDBEntities1">
+          <EntitySetMapping Name="Bein">
+            <EntityTypeMapping TypeName="HorseDBModel.Bein">
+              <MappingFragment StoreEntitySet="Bein">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="farbe" ColumnName="farbe" />
+                <ScalarProperty Name="abzeichen" ColumnName="abzeichen" />
+                <ScalarProperty Name="huf" ColumnName="huf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Foto">
+            <EntityTypeMapping TypeName="HorseDBModel.Foto">
+              <MappingFragment StoreEntitySet="Foto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pferd" ColumnName="pferd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grafik">
+            <EntityTypeMapping TypeName="HorseDBModel.Grafik">
+              <MappingFragment StoreEntitySet="Grafik">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pferd" ColumnName="pferd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Koerper">
+            <EntityTypeMapping TypeName="HorseDBModel.Koerper">
+              <MappingFragment StoreEntitySet="Koerper">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="farbe" ColumnName="farbe" />
+                <ScalarProperty Name="abzeichen" ColumnName="abzeichen" />
+                <ScalarProperty Name="maehne" ColumnName="maehne" />
+                <ScalarProperty Name="wirbel" ColumnName="wirbel" />
+                <ScalarProperty Name="dominanz" ColumnName="dominanz" />
+                <ScalarProperty Name="weiteremerkmale" ColumnName="weiteremerkmale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kopf">
+            <EntityTypeMapping TypeName="HorseDBModel.Kopf">
+              <MappingFragment StoreEntitySet="Kopf">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="farbe" ColumnName="farbe" />
+                <ScalarProperty Name="abzeichen" ColumnName="abzeichen" />
+                <ScalarProperty Name="gebiss" ColumnName="gebiss" />
+                <ScalarProperty Name="augen" ColumnName="augen" />
+                <ScalarProperty Name="wirbelzahlstirn" ColumnName="wirbelzahlstirn" />
+                <ScalarProperty Name="wirbelzahlzwischennuestern" ColumnName="wirbelzahlzwischennuestern" />
+                <ScalarProperty Name="wirbelzahloberlippe" ColumnName="wirbelzahloberlippe" />
+                <ScalarProperty Name="wirbelzahlbacken" ColumnName="wirbelzahlbacken" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merkmale">
+            <EntityTypeMapping TypeName="HorseDBModel.Merkmale">
+              <MappingFragment StoreEntitySet="Merkmale">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kopf" ColumnName="kopf" />
+                <ScalarProperty Name="vorderbeinlinks" ColumnName="vorderbeinlinks" />
+                <ScalarProperty Name="vorderbeinrechts" ColumnName="vorderbeinrechts" />
+                <ScalarProperty Name="hinterbeinlinks" ColumnName="hinterbeinlinks" />
+                <ScalarProperty Name="hinterbeinrechts" ColumnName="hinterbeinrechts" />
+                <ScalarProperty Name="koerper" ColumnName="koerper" />
+                <ScalarProperty Name="besonderheiten" ColumnName="besonderheiten" />
+                <ScalarProperty Name="beurteilung" ColumnName="beurteilung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="HorseDBModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nachname" ColumnName="nachname" />
+                <ScalarProperty Name="vorname" ColumnName="vorname" />
+                <ScalarProperty Name="titelpre" ColumnName="titelpre" />
+                <ScalarProperty Name="titelpost" ColumnName="titelpost" />
+                <ScalarProperty Name="geburtsdatum" ColumnName="geburtsdatum" />
+                <ScalarProperty Name="strasse" ColumnName="strasse" />
+                <ScalarProperty Name="hausnummer" ColumnName="hausnummer" />
+                <ScalarProperty Name="postleitzahl" ColumnName="postleitzahl" />
+                <ScalarProperty Name="ort" ColumnName="ort" />
+                <ScalarProperty Name="land" ColumnName="land" />
+                <ScalarProperty Name="hofname" ColumnName="hofname" />
+                <ScalarProperty Name="telefonnummer" ColumnName="telefonnummer" />
+                <ScalarProperty Name="mobiltelefon" ColumnName="mobiltelefon" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mitgliedsbeitragbezahlt" ColumnName="mitgliedsbeitragbezahlt" />
+                <ScalarProperty Name="mitgliedseit" ColumnName="mitgliedseit" />
+                <ScalarProperty Name="mitgliedschaftsart" ColumnName="mitgliedschaftsart" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pferd">
+            <EntityTypeMapping TypeName="HorseDBModel.Pferd">
+              <MappingFragment StoreEntitySet="Pferd">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="herkunft" ColumnName="herkunft" />
+                <ScalarProperty Name="geschlecht" ColumnName="geschlecht" />
+                <ScalarProperty Name="geburtsdatum" ColumnName="geburtsdatum" />
+                <ScalarProperty Name="geburtsort" ColumnName="geburtsort" />
+                <ScalarProperty Name="farbeundabzeichen" ColumnName="farbeundabzeichen" />
+                <ScalarProperty Name="ueln" ColumnName="ueln" />
+                <ScalarProperty Name="mikrochipnummer" ColumnName="mikrochipnummer" />
+                <ScalarProperty Name="brandnummer" ColumnName="brandnummer" />
+                <ScalarProperty Name="dna" ColumnName="dna" />
+                <ScalarProperty Name="pferdepassnummer" ColumnName="pferdepassnummer" />
+                <ScalarProperty Name="pferdepassausstellungsdatum" ColumnName="pferdepassausstellungsdatum" />
+                <ScalarProperty Name="registernummer" ColumnName="registernummer" />
+                <ScalarProperty Name="idnummer" ColumnName="idnummer" />
+                <ScalarProperty Name="zuchtbuchnummer" ColumnName="zuchtbuchnummer" />
+                <ScalarProperty Name="schlachtpferd" ColumnName="schlachtpferd" />
+                <ScalarProperty Name="abgangsstandort" ColumnName="abgangsstandort" />
+                <ScalarProperty Name="lebend" ColumnName="lebend" />
+                <ScalarProperty Name="zuchtwert" ColumnName="zuchtwert" />
+                <ScalarProperty Name="zuchtbuch" ColumnName="zuchtbuch" />
+                <ScalarProperty Name="fohlennummer" ColumnName="fohlennummer" />
+                <ScalarProperty Name="zuechter" ColumnName="zuechter" />
+                <ScalarProperty Name="besitzer" ColumnName="besitzer" />
+                <ScalarProperty Name="merkmale" ColumnName="merkmale" />
+                <ScalarProperty Name="mutter" ColumnName="mutter" />
+                <ScalarProperty Name="vater" ColumnName="vater" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

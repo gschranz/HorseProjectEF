@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b58491fc66844b4fbbf9052f114ccb6a" Name="Diagram1">
+        <EntityTypeShape EntityType="HorseDBModel.Bein" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorseDBModel.Foto" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorseDBModel.Grafik" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorseDBModel.Koerper" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorseDBModel.Kopf" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorseDBModel.Merkmale" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorseDBModel.Person" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorseDBModel.Pferd" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="HorseDBModel.merkmale_hbl" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.merkmale_hbr" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.merkmale_vbl_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.merkmale_vbr" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.foto_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.grafik_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.merkmale_koerper" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.merkmale_kopf_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.merkmale_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.besitzer_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.zuechter_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.mutter_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="HorseDBModel.vater_fk" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
